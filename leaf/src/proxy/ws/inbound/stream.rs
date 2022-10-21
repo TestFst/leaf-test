@@ -6,6 +6,7 @@ use tokio_tungstenite::accept_hdr_async;
 use tungstenite::handshake::server::{Callback, ErrorResponse, Request, Response};
 
 use crate::{proxy::*, session::Session};
+use hyper::{http};
 
 struct SimpleCallback<'a> {
     sess: &'a mut Session,

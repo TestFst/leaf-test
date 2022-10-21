@@ -8,6 +8,7 @@ use tungstenite::protocol::WebSocketConfig;
 use url::Url;
 
 use crate::{proxy::*, session::Session};
+use hyper::{http};
 
 pub struct Handler {
     pub path: String,

@@ -55,11 +55,12 @@ pub struct Handler;
 
 #[async_trait]
 impl InboundStreamHandler for Handler {
+
     async fn handle<'a>(
         &'a self,
         mut sess: Session,
         stream: Box<dyn ProxyStream>,
-    ) -> std::io::Result<InboundTransport> {
+    ) -> std::io::Result<AnyInboundTransport> {
         let http = Http::new();
         let proxy_service = ProxyService::new();
         let conn = http
@@ -100,7 +101,7 @@ impl InboundStreamHandler for Handler {
         sess.destination = destination;
 
         Ok(InboundTransport::Stream(
-            Box::new(SimpleProxyStream(parts.io)),
+            Box::new(parts.io),
             sess,
         ))
     }
